@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "12000:3000"
+    volumes:
+      - .:/app
+    command: sh -c "npm run dev"
