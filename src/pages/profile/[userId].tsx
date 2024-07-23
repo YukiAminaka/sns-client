@@ -1,8 +1,10 @@
+import ProfileEdit from "@/components/ProfileEdit";
+import { useAuth } from "@/context/auth";
 import apiClient from "@/lib/apiClient";
 import { PostType, ProfileType } from "@/types";
 import { profile } from "console";
 import { GetServerSideProps } from "next";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 type Props = {
   profile: ProfileType;
@@ -31,21 +33,35 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 };
 
 const UserProfile = ({ profile, posts }: Props) => {
+  const { user } = useAuth();
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="w-full max-w-xl mx-auto">
         <div className="bg-white shadow-md rounded-lg p-6 mb-4">
-          <div className="flex items-center">
-            <img
-              className="w-20 h-20 rounded-full mr-4"
-              src={profile.profileImageUrl}
-              alt="User Avatar"
-            />
+          <div className="flex justify-between">
+            <div className="flex items-center">
+              <img
+                className="w-20 h-20 rounded-full mr-4"
+                src={profile.profileImageUrl}
+                alt="User Avatar"
+              />
+              <div>
+                <h2 className="text-2xl font-semibold mb-1">
+                  {profile.user.username}
+                </h2>
+                <p className="text-gray-600">{profile.bio}</p>
+              </div>
+            </div>
             <div>
-              <h2 className="text-2xl font-semibold mb-1">
-                {profile.user.username}
-              </h2>
-              <p className="text-gray-600">{profile.bio}</p>
+              {user ? (
+                user.id === profile.userId ? (
+                  <ProfileEdit profile={profile} />
+                ) : (
+                  <></>
+                )
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>

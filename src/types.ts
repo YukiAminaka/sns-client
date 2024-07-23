@@ -1,8 +1,8 @@
 export interface UserType {
   id: number;
-  username: String;
-  email: String;
-  password: String;
+  username: string;
+  email: string;
+  password: string;
   posts: PostType[];
   profile: ProfileType;
 }
