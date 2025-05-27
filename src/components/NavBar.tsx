@@ -11,7 +11,7 @@ const NavBar = () => {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="font-semibold text-xl">
             <Link href="/" className="text-2xl">
-              SNS Clone
+              My SNS
             </Link>
           </h1>
           <nav>
